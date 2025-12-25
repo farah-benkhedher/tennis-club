@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Détail cours</title>
+</head>
+<body>
+
+<a href="/cours">← Retour</a>
+
+<h2 th:text="${cours.titre}"></h2>
+
+<p><b>Niveau :</b> <span th:text="${cours.niveau}"></span></p>
+<p><b>Date :</b> <span th:text="${cours.date}"></span></p>
+<p><b>Heure :</b>
+    <span th:text="${cours.heureDebut}"></span> -
+    <span th:text="${cours.heureFin}"></span>
+</p>
+
+<h3>Membres inscrits</h3>
+<ul>
+    <li th:if="${#lists.isEmpty(cours.membres)}">Aucun membre</li>
+    <li th:each="m : ${cours.membres}">
+        <span th:text="${m.nom}"></span>
+        <span th:text="${m.prenom}"></span>
+    </li>
+</ul>
+
+</body>
+</html>

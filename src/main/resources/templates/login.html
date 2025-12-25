@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+</head>
+<body>
+<h2>Connexion Tennis Club 🎾</h2>
+
+<form th:action="@{/login}" method="post">
+    <div>
+        <label>Username</label>
+        <input type="text" name="username">
+    </div>
+    <div>
+        <label>Password</label>
+        <input type="password" name="password">
+    </div>
+    <button type="submit">Se connecter</button>
+</form>
+
+<p style="color:red" th:if="${param.error}">
+    Identifiants incorrects
+</p>
+
+<p style="color:green" th:if="${param.logout}">
+    Déconnecté ✅
+</p>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+</body>
+</html>

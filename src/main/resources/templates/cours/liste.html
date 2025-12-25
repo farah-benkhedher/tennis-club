@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+<h2 class="mb-3">🎾 Liste des cours</h2>
+
+<a href="/" class="btn btn-secondary mb-3">Accueil</a>
+
+<div th:if="${isAdmin}">
+    <a href="/cours/new" class="btn btn-success mb-3">➕ Ajouter un cours</a>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+    <tr>
+        <th>Titre</th>
+        <th>Niveau</th>
+        <th>Date</th>
+        <th>Détails</th>
+        <th th:if="${isAdmin}">Actions</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="c : ${coursList}">
+        <td th:text="${c.titre}"></td>
+        <td th:text="${c.niveau}"></td>
+        <td th:text="${c.date}"></td>
+        <td>
+            <a th:href="@{/api/cours/{id}(id=${c.id})}" class="btn btn-sm btn-info">
+                REST
+            </a>
+        </td>
+
+        <td th:if="${isAdmin}">
+            <a th:href="@{/cours/edit/{id}(id=${c.id})}" class="btn btn-sm btn-warning">
+                Modifier
+            </a>
+            <a th:href="@{/cours/delete/{id}(id=${c.id})}"
+               class="btn btn-sm btn-danger"
+               onclick="return confirm('Supprimer ce cours ?');">
+                Supprimer
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>

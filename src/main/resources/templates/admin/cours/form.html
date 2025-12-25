@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Cours</title>
+</head>
+<body>
+
+<h1 th:text="${cours.id == null ? 'Ajouter un cours' : 'Modifier le cours'}"></h1>
+
+<p><a th:href="@{/admin/cours}">← Retour</a></p>
+
+<form th:action="@{/admin/cours/save}" th:object="${cours}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+
+    <label>Titre</label><br>
+    <input type="text" th:field="*{titre}" required><br><br>
+
+    <label>Description</label><br>
+    <textarea th:field="*{description}" rows="4" cols="40"></textarea><br><br>
+
+    <label>Niveau</label><br>
+    <input type="text" th:field="*{niveau}" required><br><br>
+
+    <label>Date</label><br>
+    <input type="date" th:field="*{date}" required><br><br>
+
+    <label>Heure début</label><br>
+    <input type="time" th:field="*{heureDebut}" required><br><br>
+
+    <label>Heure fin</label><br>
+    <input type="time" th:field="*{heureFin}" required><br><br>
+
+    <label>Nombre de places</label><br>
+    <input type="number" th:field="*{nbPlaces}" min="1" required><br><br>
+
+    <label>Entraineur</label><br>
+    <select th:field="*{entraineur}" required>
+        <option value="">-- Choisir --</option>
+        <option th:each="e : ${entraineurs}"
+                th:value="${e.id}"
+                th:text="${e.nom + ' ' + e.prenom}">
+        </option>
+    </select><br><br>
+
+    <label>Terrain</label><br>
+    <select th:field="*{terrain}" required>
+        <option value="">-- Choisir --</option>
+        <option th:each="t : ${terrains}"
+                th:value="${t.id}"
+                th:text="${t.nom + ' (' + t.type + ')'}">
+        </option>
+    </select><br><br>
+
+    <button type="submit">Enregistrer</button>
+</form>
+
+</body>
+</html>

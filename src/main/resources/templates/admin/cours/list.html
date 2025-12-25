@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin - Cours</title>
+</head>
+<body>
+
+<h1>Admin - Liste des cours 🎾</h1>
+
+<p>
+    <a th:href="@{/cours}">Voir page publique</a> |
+    <a th:href="@{/admin/cours/new}">➕ Ajouter un cours</a> |
+    <a th:href="@{/}">Accueil</a>
+</p>
+
+<table border="1" cellpadding="6">
+    <tr>
+        <th>Titre</th>
+        <th>Niveau</th>
+        <th>Date</th>
+        <th>Entraineur</th>
+        <th>Terrain</th>
+        <th>Places</th>
+        <th>Actions</th>
+    </tr>
+
+    <tr th:each="c : ${coursList}">
+        <td th:text="${c.titre}"></td>
+        <td th:text="${c.niveau}"></td>
+        <td th:text="${c.date}"></td>
+        <td th:text="${c.entraineur != null ? c.entraineur.nom : '-'}"></td>
+        <td th:text="${c.terrain != null ? c.terrain.nom : '-'}"></td>
+        <td th:text="${c.nbPlaces}"></td>
+        <td>
+            <a th:href="@{/admin/cours/edit/{id}(id=${c.id})}">✏️ Modifier</a>
+            |
+            <a th:href="@{/admin/cours/delete/{id}(id=${c.id})}"
+               onclick="return confirm('Supprimer ce cours ?')">🗑️ Supprimer</a>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
